@@ -1,0 +1,137 @@
+/* index.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ccdbfd;
+  padding: 1rem 2rem;
+  color: rgb(26, 25, 25);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #19191a;
+  text-decoration: none;
+}
+
+.navbar-container h1:hover {
+  color: #3498db;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-links a {
+  color: #2a2c2c;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.navbar-links a:hover {
+  color: #3498db;
+}
+
+nav button {
+  width: 50%;
+  padding: .8rem;
+  background-color: #91c4e3; /* Light blue button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+nav button:hover {
+  background-color: #6daedb; /* Darker blue on hover */
+}
+
+/* Login Form Styles */
+.login {
+  background-color: #ffffff; /* White background for the form */
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px; /* Set the form width */
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 2rem auto; /* Center the form horizontally */
+}
+
+.login h3 {
+  font-size: 2rem; /* Larger font size for the header */
+  margin-bottom: 1.5rem;
+  color: #19191a; /* Dark text for contrast */
+}
+
+.login label {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color:#0056b3;
+}
+
+.login input,
+.login select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.login input:focus,
+.login select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+}
+
+.login button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #007bff; /* Blue button */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.login .error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+/* Media Query for Responsive Design */
+@media (max-width: 768px) {
+  .login {
+    width: 90%; /* Full width on smaller screens */
+  }
+
+  .login h3 {
+    font-size: 1.5rem;
+  }
+
+  .login input,
+  .login select,
+  .login button {
+    font-size: 1rem;
+  }
+}

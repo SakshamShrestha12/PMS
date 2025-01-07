@@ -15,11 +15,15 @@ const patientSchema=new Schema({
         type: Date,
         required: true
     },
+    Email:{
+        type: String,
+        required: true
+    },
     Address: {
         type: String,
         required: true
     },
-    Conact_details:{
+    Contact_details:{
         type: Number,
         required: true
     },

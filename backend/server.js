@@ -3,6 +3,7 @@ const express=require('express')
 const mongoose=require('mongoose')
 
 const PatientRoutes=require('./routes/Patients')
+const userRoutes=require('./routes/User')
 
 const app=express()
 
@@ -16,6 +17,7 @@ app.use((req,res,next)=>{
 
 //routes
 app.use('/api/Patients',PatientRoutes)
+app.use('/api/user',userRoutes)
 //Connection to DB
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
