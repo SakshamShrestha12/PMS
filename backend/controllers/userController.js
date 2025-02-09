@@ -18,10 +18,10 @@ const addAdmin = async (req, res) => {
       return res.status(400).json({ error: "Invalid role specified" });
     }
 
-    // Check if user already exists
+    // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.status(400).json({ error: "User with this email already exists" });
     }
 
     // Hash the password
@@ -37,14 +37,19 @@ const addAdmin = async (req, res) => {
     // Save the user to the database
     await newUser.save();
 
+    // Return success response
     res.status(201).json({
       success: true,
-      message: `${role === "admin" ? "Admin" : "Super Admin"} added successfully`,
-      user: { id: newUser._id, email: newUser.email, role: newUser.role },
+      message: `${role === "admin" ? "Admin" : "Super Admin"} added successfully.`,
+      user: {
+        id: newUser._id,
+        email: newUser.email,
+        role: newUser.role,
+      },
     });
   } catch (error) {
     console.error("Error adding admin:", error);
-    res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Server Error, unable to add admin." });
   }
 };
 

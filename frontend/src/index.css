@@ -55,6 +55,144 @@ nav button {
 nav button:hover {
   background-color: #6daedb; /* Darker blue on hover */
 }
+/* General styling */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eaf3ff;
+  color: #333;
+}
+
+.superadmin-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Sidebar styling */
+.sidebar {
+  background-color: #c9ddff;
+  width: 250px;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul > li {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sidebar nav ul ul {
+  margin-left: 20px;
+  margin-bottom: 15px;
+}
+
+.sidebar nav ul ul li {
+  font-weight: normal;
+  margin-bottom: 8px;
+}
+
+/* Main content styling */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  color: #0d47a1;
+}
+
+.filter-search {
+  display: flex;
+  align-items: center;
+}
+
+.filter-button {
+  background-color: #0d47a1;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.filter-button:hover {
+  background-color: #06337a;
+}
+
+.search-bar {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Patient table styling */
+.patient-table h2 {
+  font-size: 1.5rem;
+  color: #0d47a1;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+table th,
+table td {
+  text-align: left;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f1f7ff;
+  font-weight: bold;
+  color: #0d47a1;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9fcff;
+}
+
+table tbody tr:hover {
+  background-color: #e8f4ff;
+}
+
+table td {
+  color: #333;
+}
+
 
 /* Login Form Styles */
 .login {
@@ -134,4 +272,402 @@ nav button:hover {
   .login button {
     font-size: 1rem;
   }
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content (Form inside the modal) */
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 100%;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Close Button Styling */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.close-button:hover {
+  color: #e60000;
+}
+
+/* Form styling inside modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input Fields Styling */
+.modal-content input {
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Input fields focus effect */
+.modal-content input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit Button Styling */
+.modal-content button {
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+  background-color: #09519e;
+}
+
+/* Super Admin Home Page Container */
+.home {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+/* Add Admin Button */
+.add-admin-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-admin-button:hover {
+  background-color: #45a049;
+}
+
+/* Patients List Section */
+.patients {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.patients h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.patients p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: #555;
+}
+
+/* Loading and Error Messages */
+.patients p.loading {
+  font-size: 1.2rem;
+  color: #888;
+}
+
+.patients p.error {
+  font-size: 1.1rem;
+  color: red;
+  font-weight: bold;
+}
+
+/* Patient Item Styling */
+.patient-item {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.patient-item:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.patient-item p {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* App.css */
+
+.app-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.sidebar {
+  background-color: #d0e7ff;
+  width: 20%;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul ul {
+  padding-left: 20px;
+}
+
+.main-content {
+  flex-grow: 1;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
+
+.main-content h2 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+.status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status.green {
+  background-color: green;
+}
+
+.status.red {
+  background-color: red;
+}
+
+/*RegsiterOPD*/
+/* General layout */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eaf3ff;
+  color: #333;
+}
+
+.superadmin-container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  background-color: #e0ebff;
+  width: 250px;
+  height: 100vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #003366;
+  margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #003366;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.sidebar nav ul li:hover {
+  color: #0056b3;
+}
+
+.sidebar nav ul ul {
+  margin-left: 20px;
+}
+
+.sidebar nav ul ul li {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  color: #004080;
+  cursor: pointer;
+}
+
+.sidebar nav ul ul li:hover {
+  color: #0066cc;
+}
+
+
+/* Register Form */
+.register-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.register-form h2 {
+  font-size: 1.5rem;
+  color: #0d47a1;
+  margin-bottom: 10px;
+}
+
+.form-id {
+  text-align: right;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.radio-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+}
+
+input[type="radio"] {
+  margin: 0;
+}
+
+.register-button {
+  padding: 12px;
+  background-color: #0d47a1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.register-button:hover {
+  background-color: #06337a;
+}
+/*APPLAYOUT*/
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.sidebar {
+  position: fixed;
+  top: 90px; /* Height of Navbar */
+  left: 0;
+  width: 250px;
+  height: calc(100vh - 50px); /* Adjust for Navbar */
+  overflow-y: auto;
+}
+
+.main-content {
+  margin-top: 20px; /* Height of Navbar */
+  margin-left: 150px; /* Width of Sidebar */
+  padding: 0px;
+  flex: 1;
+  overflow-y: auto;
 }

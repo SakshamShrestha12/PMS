@@ -27,6 +27,10 @@ const patientSchema=new Schema({
         type: Number,
         required: true
     },
+    consultant:{
+        type: String,
+        required: true
+    },
     Insurance_details:{
         type:Number,
         required: false
