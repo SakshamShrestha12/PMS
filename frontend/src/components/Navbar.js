@@ -46,9 +46,6 @@ const Sidebar = () => {
             <li onClick={() => navigate("/opd/patients")} style={{ cursor: "pointer" }}>
               Patients list
             </li>
-            <li onClick={() => navigate("/opd/payment")} style={{ cursor: "pointer" }}>
-              Payment
-            </li>
           </ul>
           <li>IPD</li>
           <ul>
@@ -57,9 +54,6 @@ const Sidebar = () => {
             </li>
             <li onClick={() => navigate("/ipd/patients")} style={{ cursor: "pointer" }}>
               Patients list
-            </li>
-            <li onClick={() => navigate("/ipd/payment")} style={{ cursor: "pointer" }}>
-              Payment
             </li>
           </ul>
           <li>Medicine</li>

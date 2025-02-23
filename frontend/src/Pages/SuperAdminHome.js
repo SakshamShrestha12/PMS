@@ -125,7 +125,7 @@ const SuperAdminHome = () => {
 
   return (
     <div className="home">
-      <div className="header">
+      <div className="header" style={{ marginLeft: "250px" }}>
         <h1>Super Admin Dashboard</h1>
         <button onClick={() => setShowModal(true)} className="add-admin-button">
           Add Admins
@@ -133,10 +133,12 @@ const SuperAdminHome = () => {
       </div>
 
       {successMessage && (
-        <div className="success-message" onClick={() => setSuccessMessage("")}>{successMessage}</div>
+        <div className="success-message" onClick={() => setSuccessMessage("")}>
+          {successMessage}
+        </div>
       )}
 
-      <div className="patients">
+      <div className="patients" style={{ marginLeft: "250px" }}>
         <h2>Patients</h2>
         {loadingPatients && <p>Loading patients...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}
@@ -149,7 +151,7 @@ const SuperAdminHome = () => {
         </ul>
       </div>
 
-      <div className="admins">
+      <div className="admins" style={{ marginLeft: "250px" }}>
         <h2>Admins</h2>
         {loadingAdmins && <p>Loading admins...</p>}
         {error && <p style={{ color: "red" }}>{error}</p>}

@@ -5,8 +5,13 @@ import LoginPage from "./Pages/login";
 import AdminHome from "./Pages/AdminHome";
 import SuperAdminHome from "./Pages/SuperAdminHome";
 import DepartmentsPage from "./Pages/DepartmentPage";
+import RegisterIPDPatients from "./Pages/RegisterIPDPatients";
 import RegisterOPDPatients from "./Pages/RegisterOPDPatients";
 import AppLayout from "./components/AppLayout"; // New Layout Component
+import OPDPatientList from "./Pages/OPDPatients";
+import IPDPatientList from "./Pages/IPDPatients";
+import Departments from "./Pages/DepartmentPage";
+
 
 const App = () => {
   return (
@@ -45,6 +50,38 @@ const App = () => {
           element={
             <AppLayout>
               <RegisterOPDPatients />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/ipd/register"
+          element={
+            <AppLayout>
+              <RegisterIPDPatients />
+            </AppLayout>
+          }
+        />
+         <Route
+          path="/opd/patients"
+          element={
+            <AppLayout>
+              <OPDPatientList />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/ipd/patients"
+          element={
+            <AppLayout>
+              <IPDPatientList />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/api/departments"
+          element={
+            <AppLayout>
+              <Departments />
             </AppLayout>
           }
         />

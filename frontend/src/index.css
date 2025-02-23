@@ -671,3 +671,200 @@ input[type="radio"] {
   flex: 1;
   overflow-y: auto;
 }
+/*OPDPatients*/
+.patient-list-container {
+  padding: 20px;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.patient-list-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patient-list-table th,
+.patient-list-table td {
+  padding: 10px;
+  text-align: center;
+}
+
+.patient-list-table th {
+  background-color: #f4f4f4;
+}
+
+.patient-list-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.patient-list-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Add these styles to ensure the patient list fits and adjusts with the sidebar */
+.patient-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: calc(100% - 250px); /* Adjust this to the width of your sidebar */
+  overflow-x: hidden;
+  margin-left: 250px; /* Assuming sidebar width is 250px */
+}
+
+.patient-list-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow-x: auto;
+}
+
+.patient-list-table th, .patient-list-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .patient-list-container {
+    margin-left: 0;
+    max-width: 100%;
+  }
+
+  .patient-list-table th, .patient-list-table td {
+    padding: 8px;
+  }
+
+  .search-bar input {
+    width: 100%;
+    padding: 8px;
+  }
+}
+
+/* Department Page */
+/* Main content wrapper */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Departments container */
+.departments-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+/* Department list wrapper */
+.department-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+/* Individual department block */
+.department-block {
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  padding: 20px;
+  width: calc(33.333% - 20px); /* 3 items per row, flexible */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  text-align: center;
+}
+
+/* Ensure the department blocks are centered and responsive */
+.department-list > .department-block {
+  flex: 1 1 calc(33% - 20px);
+}
+
+.department-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Department name style */
+.department-block h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Department description style */
+.department-block p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+/* Strong label for doctor count */
+.department-block strong {
+  font-weight: bold;
+}
+
+/* Doctor count style */
+.department-block .doctor-count {
+  color: #2e8b57;
+  font-weight: bold;
+}
+
+/* Header for the departments section */
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Add responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .department-block {
+    width: 100%; /* Stacks departments vertically on smaller screens */
+  }
+}
+.doctor-info {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.doctor-info strong {
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+.available-times {
+  list-style: none;
+  padding: 0;
+}
+
+.available-times li {
+  background: #e8f5e9;
+  color: #2e8b57;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 5px 0;
+  display: inline-block;
+}
+
+

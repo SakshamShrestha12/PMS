@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../index.css"; // Import CSS file
 
-const RegisterOPDPatients = () => {
+const RegisterIPDPatients = () => {
   const [formData, setFormData] = useState({
     name: "",
     date: "",
@@ -21,7 +21,7 @@ const RegisterOPDPatients = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/opd", {
+      const response = await fetch("/api/ipd", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ const RegisterOPDPatients = () => {
   return (
     <main className="main-content">
       <section className="register-form">
-        <h2>OP - Register a Patient</h2>
+        <h2>IP - Register a Patient</h2>
         <form onSubmit={handleSubmit}>
   <div className="form-row">
     <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleChange} required />
@@ -82,4 +82,4 @@ const RegisterOPDPatients = () => {
   );
 };
 
-export default RegisterOPDPatients;
+export default RegisterIPDPatients;

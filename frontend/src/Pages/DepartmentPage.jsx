@@ -1,68 +1,78 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../index.css"; // Ensure the CSS file is linked
+import React, { useState, useEffect } from "react";
+import "../index.css";
 
-const DepartmentsPage = () => {
+const Departments = () => {
+  const [departments, setDepartments] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [doctors, setDoctors] = useState([]);
+
+  useEffect(() => {
+    const fetchDepartments = async () => {
+      try {
+        const response = await fetch("/api/departments");
+        if (!response.ok) throw new Error("Failed to fetch departments");
+        const data = await response.json();
+        setDepartments(data);
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+
+    fetchDepartments();
+  }, []);
+
+  const fetchDoctors = async (departmentId) => {
+    try {
+      const response = await fetch(`/api/departments/doctors/by-department/${departmentId}`);
+      if (!response.ok) throw new Error("Failed to fetch doctors");
+      const data = await response.json();
+      setDoctors(data);
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
+    }
+  };
+
+  const handleDepartmentClick = (dept) => {
+    setSelectedDepartment(dept);
+    fetchDoctors(dept._id);
+  };
+
   return (
-    <div className="app-container">
-      <aside className="sidebar">
-        <h2>Patient Management System</h2>
-        <nav>
-          <ul>
-            <li>
-              <strong>Manager</strong>
-            </li>
-            <li>
-              <strong>OPD</strong>
+    <div className="main-content">
+      <div className="departments-container">
+        <h2>Hospital Departments</h2>
+        {departments.length > 0 ? (
+          <div className="department-list">
+            {departments.map((dept) => (
+              <div key={dept._id} className="department-block" onClick={() => handleDepartmentClick(dept)}>
+                <h3>{dept.name}</h3>
+                <p>{dept.description}</p>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No departments available.</p>
+        )}
+
+        {selectedDepartment && (
+          <div className="doctors-container">
+            <h3>Doctors in {selectedDepartment.name}</h3>
+            {doctors.length > 0 ? (
               <ul>
-                <li><Link to="/opd/register">Register patients</Link></li>
-                <li><Link to="/opd/patients">Patients list</Link></li>
-                <li><Link to="/opd/paiment">Payment</Link></li>
+                {doctors.map((doc) => (
+                  <li key={doc._id}>
+                    {doc.name} - {doc.specialization}
+                  </li>
+                ))}
               </ul>
-            </li>
-            <li>
-              <strong>IPD</strong>
-              <ul>
-                <li><Link to="/ipd/register">Register patients</Link></li>
-                <li><Link to="/ipd/patients">Patients list</Link></li>
-                <li><Link to="/ipd/paiment">Payment</Link></li>
-              </ul>
-            </li>
-            <li>
-              <strong>Medicines</strong>
-              <ul>
-                <li><Link to="/medicines">List all</Link></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-      <main className="main-content">
-        <h2>Departments - Name</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Doctors</th>
-              <th>Status</th>
-              <th>Available till</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Dr. Smith</td>
-              <td><span className="status green"></span></td>
-              <td>02:30 PM</td>
-            </tr>
-            <tr>
-              <td>Dr. John</td>
-              <td><span className="status red"></span></td>
-              <td>04:00 PM</td>
-            </tr>
-          </tbody>
-        </table>
-      </main>
+            ) : (
+              <p>No doctors available in this department.</p>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default DepartmentsPage;
+export default Departments;
