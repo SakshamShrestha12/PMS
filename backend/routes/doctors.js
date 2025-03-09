@@ -6,7 +6,7 @@ const Department = require("../models/DepartmentsModel");
 // 📌 Create a new doctor
 router.post("/", async (req, res) => {
   try {
-    const { name, specialization, department_id, availableTimes } = req.body;
+    const { name, specialization, department_id, availability } = req.body;
 
     // Validate department_id
     const departmentExists = await Department.findById(department_id);
@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
       name,
       specialization,
       department_id,
-      availableTimes,
+      availability,
     });
 
     await doctor.save();
@@ -60,7 +60,7 @@ router.get("/by-department/:departmentId", async (req, res) => {
 router.put("/:doctorId", async (req, res) => {
   try {
     const { doctorId } = req.params;
-    const { name, specialization, department_id, availableTimes } = req.body;
+    const { name, specialization, department_id, availability } = req.body;
 
     // Validate department_id if provided
     if (department_id) {
@@ -72,7 +72,7 @@ router.put("/:doctorId", async (req, res) => {
 
     const updatedDoctor = await Doctor.findByIdAndUpdate(
       doctorId,
-      { name, specialization, department_id, availableTimes },
+      { name, specialization, department_id, availability },
       { new: true }
     );
 
