@@ -4,11 +4,30 @@ import "../index.css";
 const OPDPatientList = () => {
   const [patients, setPatients] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [departments, setDepartments] = useState([]);
+  const [doctors, setDoctors] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState("");
 
   useEffect(() => {
+    // Fetch departments from backend
+    const fetchDepartments = async () => {
+      try {
+        const response = await fetch("/api/departments"); // Fetch departments
+        if (!response.ok) throw new Error("Failed to fetch departments");
+        const data = await response.json();
+        setDepartments(data);
+      } catch (error) {
+        console.error("Error fetching departments:", error);
+      }
+    };
+    fetchDepartments();
+  }, []);
+
+  useEffect(() => {
+    // Fetch patients from backend
     const fetchPatients = async () => {
       try {
-        const response = await fetch("/api/opd"); // ✅ Fixed API route
+        const response = await fetch("/api/opd"); // Fetch IPD patients
         if (!response.ok) throw new Error("Failed to fetch patients");
         const data = await response.json();
         setPatients(data);
@@ -21,6 +40,23 @@ const OPDPatientList = () => {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleDepartmentChange = async (e) => {
+    const departmentId = e.target.value;
+    setSelectedDepartment(departmentId);
+
+    if (departmentId) {
+      try {
+        const response = await fetch(`/api/doctors/by-department/${departmentId}`);
+        const data = await response.json();
+        setDoctors(data);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
+    } else {
+      setDoctors([]); // Reset doctors list if no department selected
+    }
   };
 
   const filteredPatients = patients.filter((patient) =>
@@ -39,6 +75,20 @@ const OPDPatientList = () => {
         />
       </div>
 
+      <div className="department-filter">
+        <select
+          value={selectedDepartment}
+          onChange={handleDepartmentChange}
+        >
+          <option value="">Select Department</option>
+          {departments.map((department) => (
+            <option key={department._id} value={department._id}>
+              {department.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <table className="patient-list-table">
         <thead>
           <tr>
@@ -47,22 +97,26 @@ const OPDPatientList = () => {
             <th>Address</th>
             <th>Date</th>
             <th>Consultant</th>
+            <th>Department</th> {/* Added Department Column */}
+            <th>Doctor</th> {/* Added Doctor Column */}
           </tr>
         </thead>
         <tbody>
           {filteredPatients.length > 0 ? (
             filteredPatients.map((patient, index) => (
-              <tr key={patient._id || index}> {/* ✅ Use MongoDB `_id` if available */}
+              <tr key={patient._id || index}>
                 <td>{patient.name}</td>
                 <td>{patient.age}</td>
-                <td>{patient.place}</td>
-                <td>{patient.date ? new Date(patient.date).toLocaleDateString() : "N/A"}</td> {/* ✅ Fix date format */}
+                <td>{patient.address}</td>
+                <td>{patient.date ? new Date(patient.date).toLocaleDateString() : "N/A"}</td>
                 <td>{patient.consultant}</td>
+                <td>{patient.department?.name || "N/A"}</td> {/* Use department name */}
+                <td>{patient.doctor?.name || "N/A"}</td> {/* Use doctor name */}
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5">No patients found</td>
+              <td colSpan="7">No patients found</td>
             </tr>
           )}
         </tbody>

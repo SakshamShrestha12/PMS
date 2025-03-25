@@ -1,27 +1,60 @@
 const express = require("express");
 const IPDPatient = require("../models/IPDPatient");
+const Department = require("../models/DepartmentsModel");
+const Doctor = require("../models/Doctor");
+
 const router = express.Router();
 
-// Route to register a new IPD patient
+// 📌 Register a new IPD patient
 router.post("/", async (req, res) => {  
   try {
-    console.log("Received data:", req.body); 
+    console.log("Received data:", req.body);
 
-    const newPatient = new IPDPatient(req.body);
+    const { name, date, age, gender, bloodGroup, address, phone, dob, department, doctor } = req.body;
+
+    // Validate Department
+    const departmentExists = await Department.findById(department);
+    if (!departmentExists) {
+      return res.status(400).json({ error: "Invalid department ID!" });
+    }
+
+    // Validate Doctor
+    const doctorExists = await Doctor.findById(doctor);
+    if (!doctorExists) {
+      return res.status(400).json({ error: "Invalid doctor ID!" });
+    }
+
+    // Create new patient
+    const newPatient = new IPDPatient({
+      name,
+      date,
+      age,
+      gender,
+      bloodGroup,
+      address,
+      phone,
+      dob,
+      department,
+      doctor,
+    });
+
     await newPatient.save();
 
     console.log("Patient saved successfully!");
-    res.status(201).json({ message: "IPD patient registered successfully" });
+    res.status(201).json({ message: "IPD patient registered successfully", patient: newPatient });
   } catch (error) {
     console.error("Error saving patient:", error);
     res.status(500).json({ error: error.message });
   }
 });
 
-// Route to get all IPD patients
+// 📌 Get all IPD patients with department and doctor details
 router.get("/", async (req, res) => {  
   try {
-    const ipdPatients = await IPDPatient.find();
+    const ipdPatients = await IPDPatient.find()
+      .populate("department", "name") // Populate department name
+      .populate("doctor", "name"); // Populate doctor name
+
     res.json(ipdPatients);
   } catch (error) {
     console.error("Error fetching IPD patients:", error);
