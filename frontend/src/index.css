@@ -439,6 +439,14 @@ table td {
   font-size: 1rem;
   color: #333;
 }
+.edit-options button {
+  margin-right: 8px; /* Add spacing between buttons */
+}
+
+.modal-buttons button {
+  margin-right: 8px;
+}
+
 
 /* App.css */
 
@@ -671,7 +679,8 @@ input[type="radio"] {
   flex: 1;
   overflow-y: auto;
 }
-/*OPDPatients*/
+
+/* OPD Register */
 .patient-list-container {
   padding: 20px;
 }
@@ -703,15 +712,15 @@ input[type="radio"] {
   background-color: #f1f1f1;
 }
 
-/* Add these styles to ensure the patient list fits and adjusts with the sidebar */
+/* Layout adjustments */
 .patient-list-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  max-width: calc(100% - 250px); /* Adjust this to the width of your sidebar */
+  max-width: calc(100% - 250px);
   overflow-x: hidden;
-  margin-left: 250px; /* Assuming sidebar width is 250px */
+  margin-left: 250px;
 }
 
 .patient-list-table {
@@ -720,7 +729,8 @@ input[type="radio"] {
   overflow-x: auto;
 }
 
-.patient-list-table th, .patient-list-table td {
+.patient-list-table th,
+.patient-list-table td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -735,21 +745,86 @@ input[type="radio"] {
   border-radius: 5px;
 }
 
+/* Input styles */
+input,
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Smaller fields */
+input[name="phone"],
+input[name="dob"],
+input[name="date"],
+select[name="department"],
+select[name="doctor"] {
+  max-width: 200px;
+}
+
+/* Ensuring select dropdowns look good */
+select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select:disabled {
+  background-color: #f4f4f4;
+  cursor: not-allowed;
+}
+
+/* Form row improvements */
+.form-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+/* Responsive styles */
 @media (max-width: 768px) {
   .patient-list-container {
     margin-left: 0;
     max-width: 100%;
   }
 
-  .patient-list-table th, .patient-list-table td {
+  .patient-list-table th,
+  .patient-list-table td {
     padding: 8px;
   }
 
-  .search-bar input {
+  .search-bar input,
+  input,
+  select {
     width: 100%;
     padding: 8px;
   }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  input[name="phone"],
+  input[name="dob"],
+  input[name="date"],
+  select[name="department"],
+  select[name="doctor"] {
+    max-width: 100%;
+  }
 }
+
+
 
 /* Department Page */
 .main-content {

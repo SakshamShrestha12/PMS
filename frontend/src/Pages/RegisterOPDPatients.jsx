@@ -5,7 +5,6 @@ const RegisterOPDPatients = () => {
   const [formData, setFormData] = useState({
     name: "",
     date: "",
-    age: "",
     gender: "",
     bloodGroup: "",
     address: "",
@@ -15,10 +14,10 @@ const RegisterOPDPatients = () => {
     doctor: "", // Add doctor to the formData
   });
 
-  const [departments, setDepartments] = useState([]);  // State to store departments
-  const [doctors, setDoctors] = useState([]);          // State to store doctors based on department
+  const [age, setAge] = useState(""); // State to store calculated age
 
   // Fetch departments from backend
+  const [departments, setDepartments] = useState([]);
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
@@ -33,6 +32,7 @@ const RegisterOPDPatients = () => {
   }, []);
 
   // Fetch doctors based on selected department
+  const [doctors, setDoctors] = useState([]);
   const handleDepartmentChange = async (e) => {
     const departmentId = e.target.value;
     setFormData({ ...formData, department: departmentId });
@@ -51,7 +51,20 @@ const RegisterOPDPatients = () => {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+
+    if (name === "dob") {
+      const birthDate = new Date(value);
+      const today = new Date();
+      const ageValue = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        setAge(ageValue - 1);
+      } else {
+        setAge(ageValue);
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -62,17 +75,16 @@ const RegisterOPDPatients = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, age }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        alert("IPD patient registered successfully!");
+        alert("OPD patient registered successfully!");
         setFormData({
           name: "",
           date: "",
-          age: "",
           gender: "",
           bloodGroup: "",
           address: "",
@@ -81,6 +93,7 @@ const RegisterOPDPatients = () => {
           department: "",
           doctor: "",
         });
+        setAge("");
       } else {
         alert(data.error || "Something went wrong!");
       }
@@ -115,14 +128,6 @@ const RegisterOPDPatients = () => {
           </div>
 
           <div className="form-row">
-            <input
-              type="number"
-              name="age"
-              placeholder="Age"
-              value={formData.age}
-              onChange={handleChange}
-              required
-            />
             <div className="radio-group">
               <label>
                 <input
@@ -192,6 +197,7 @@ const RegisterOPDPatients = () => {
               required
             />
             <label htmlFor="dob">Date of Birth</label>
+            {age && <span>Age: {age} years</span>}
           </div>
 
           <div className="form-row">
@@ -221,7 +227,7 @@ const RegisterOPDPatients = () => {
               <option value="">Select Doctor</option>
               {doctors.map((doctor) => (
                 <option key={doctor._id} value={doctor._id}>
-                  Dr. {doctor.name} - {doctor.specialization}
+                  {doctor.name} - {doctor.specialization}
                 </option>
               ))}
             </select>
