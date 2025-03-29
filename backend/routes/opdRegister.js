@@ -1,11 +1,11 @@
 const express = require("express");
-const IPDPatient = require("../models/OPDPatient");
+const OPDPatient = require("../models/OPDPatient"); // ✅ Correct OPD model
 const Department = require("../models/DepartmentsModel");
 const Doctor = require("../models/Doctor");
 
 const router = express.Router();
 
-// 📌 Register a new IPD patient
+// 📌 Register a new OPD patient
 router.post("/", async (req, res) => {  
   try {
     console.log("Received data:", req.body);
@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     }
 
     // Create new patient
-    const newPatient = new IPDPatient({
+    const newPatient = new OPDPatient({
       name,
       date,
       age,
@@ -41,23 +41,45 @@ router.post("/", async (req, res) => {
     await newPatient.save();
 
     console.log("Patient saved successfully!");
-    res.status(201).json({ message: "IPD patient registered successfully", patient: newPatient });
+    res.status(201).json({ message: "OPD patient registered successfully", patient: newPatient });
   } catch (error) {
     console.error("Error saving patient:", error);
     res.status(500).json({ error: error.message });
   }
 });
 
-// 📌 Get all IPD patients with department and doctor details
+// 📌 Get all OPD patients with department and doctor details
 router.get("/", async (req, res) => {  
   try {
-    const ipdPatients = await IPDPatient.find()
+    const opdPatients = await OPDPatient.find()
       .populate("department", "name") // Populate department name
       .populate("doctor", "name"); // Populate doctor name
 
-    res.json(ipdPatients);
+    res.json(opdPatients);
   } catch (error) {
     console.error("Error fetching OPD patients:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// 📌 Update OPD patient details
+router.put("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log("Updating OPD patient with ID:", id, "New Data:", req.body);
+
+    // Validate if patient exists
+    let patient = await OPDPatient.findById(id);
+    if (!patient) {
+      return res.status(404).json({ error: "OPD patient not found" });
+    }
+
+    // Update patient details
+    patient = await OPDPatient.findByIdAndUpdate(id, req.body, { new: true });
+
+    res.json({ message: "OPD patient updated successfully", patient });
+  } catch (error) {
+    console.error("Error updating OPD patient:", error);
     res.status(500).json({ error: error.message });
   }
 });

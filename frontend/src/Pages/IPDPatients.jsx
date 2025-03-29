@@ -11,6 +11,8 @@ const IPDPatientList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editMode, setEditMode] = useState("status");
 
+  const statusOptions = ["Not Checked", "Pending", "Checked", "Stay", "Discharged"];
+
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
@@ -111,7 +113,6 @@ const IPDPatientList = () => {
             <th>Age</th>
             <th>Address</th>
             <th>Date</th>
-            <th>Consultant</th>
             <th>Department</th>
             <th>Doctor</th>
             <th>Status</th>
@@ -125,7 +126,6 @@ const IPDPatientList = () => {
               <td>{patient.age}</td>
               <td>{patient.address}</td>
               <td>{new Date(patient.date).toLocaleDateString()}</td>
-              <td>{patient.consultant}</td>
               <td>{patient.department?.name || "N/A"}</td>
               <td>{patient.doctor?.name || "N/A"}</td>
               <td>{patient.status || "N/A"}</td>
@@ -145,12 +145,15 @@ const IPDPatientList = () => {
             </div>
 
             {editMode === "status" ? (
-              <input
-                type="text"
+              <select
                 value={selectedPatient.status || ""}
                 onChange={(e) => setSelectedPatient({ ...selectedPatient, status: e.target.value })}
-                placeholder="Enter status"
-              />
+              >
+                <option value="">Select Status</option>
+                {statusOptions.map((status) => (
+                  <option key={status} value={status}>{status}</option>
+                ))}
+              </select>
             ) : (
               <>
                 <input type="text" value={selectedPatient.name} onChange={(e) => setSelectedPatient({ ...selectedPatient, name: e.target.value })} placeholder="Enter Name" />
